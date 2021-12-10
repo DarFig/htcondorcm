@@ -1,0 +1,27 @@
+#------------------------------
+# htcondorcm imagen cm de condor sobre ubuntu
+#------------------------------
+# changelog
+# - 1.0: basada en sshbaseimage, htcondor 9.4.0
+#------------------------------
+
+
+ARG VERSION=9.4.0
+
+FROM ghcr.io/darfig/sshbaseimage:latest
+
+LABEL manteiner="https://github.com/DarFig"
+LABEL licenses="Apache-2.0"
+
+
+RUN touch
+RUN echo "use ROLE : CentralManager"
+
+ENV HTCONDOR_PASSWORD=""
+ENV CENTRAL_MANAGER=""
+
+curl -fsSL https://get.htcondor.org | GET_HTCONDOR_PASSWORD="$HTCONDOR_PASSWORD" /bin/bash -s -- --no-dry-run --central-manager $CENTRAL_MANAGER
+
+EXPOSE 9618
+EXPOSE 22
+
