@@ -20,7 +20,9 @@ RUN echo "use ROLE : CentralManager"
 ENV HTCONDOR_PASSWORD=""
 ENV CENTRAL_MANAGER=""
 
-curl -fsSL https://get.htcondor.org | GET_HTCONDOR_PASSWORD="$HTCONDOR_PASSWORD" /bin/bash -s -- --no-dry-run --channel "$VERSION" --central-manager $CENTRAL_MANAGER
+ADD https://get.htcondor.org /getcondor.sh
+RUN chmod u+x /getcondor.sh
+RUN /getcondor.sh GET_HTCONDOR_PASSWORD="$HTCONDOR_PASSWORD" /bin/bash -s -- --no-dry-run --channel "$VERSION" --central-manager $CENTRAL_MANAGER
 
 EXPOSE 9618
 EXPOSE 22
