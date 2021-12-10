@@ -14,8 +14,8 @@ LABEL manteiner="https://github.com/DarFig"
 LABEL licenses="Apache-2.0"
 
 
-RUN touch
-RUN echo "use ROLE : CentralManager"
+
+#RUN echo "use ROLE : CentralManager"
 
 ENV HTCONDOR_PASSWORD=""
 ENV CENTRAL_MANAGER=""
