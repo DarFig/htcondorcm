@@ -71,4 +71,5 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q build-essential apt-uti
 EXPOSE 9618
 EXPOSE 22
 
-ENTRYPOINT ["configure.sh"]
+#ENTRYPOINT ["configure.sh"]
+ENTRYPOINT ["/run.sh"]
