@@ -1,5 +1,23 @@
 #!/bin/bash
 
+# configure condor
+CONFIG_FILE="/etc/condor/config.d/01-central-manager.config"
+echo CONDOR_HOST = ${CENTRAL_MANAGER} > ${CONFIG_FILE}
+echo '# For details, run condor_config_val use role:get_htcondor_central_manager' >> ${CONFIG_FILE}
+echo 'use role:get_htcondor_central_manager' >> ${CONFIG_FILE}
+
+
+#token
+rm -f /etc/condor/config.d/00-htcondor-${VERSION_M}.config
+echo -n "${HTCONDOR_PASSWORD}" | sh -c "condor_store_cred add -c -i -"
+# Now issue myself a token.
+umask 0077; condor_token_create -identity condor@${CENTRAL_MANAGER} > /etc/condor/tokens.d/condor@${CENTRAL_MANAGER}
+
+#start condor
+condor_master
+
+
+
 #configure
 echo "base $LDAP_BASE" >> /etc/ldap.conf
 echo "uri $LDAP_URI" >> /etc/ldap.conf
