@@ -44,8 +44,8 @@ RUN sh -c 'DEBIAN_FRONTEND=noninteractive apt-get install -y keyboard-configurat
 RUN sh -c 'apt-get install -y htcondor'
 
 # add files
-ADD configure.sh ./configure.sh
-RUN chmod a+x ./configure.sh
+#ADD configure.sh ./configure.sh
+#RUN chmod a+x ./configure.sh
 
 ADD run.sh /run.sh
 RUN chmod a+x /run.sh
